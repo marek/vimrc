@@ -1,5 +1,3 @@
-:set mouse=a
-
 "{{{Auto Commands
 
 " Automatically cd into the directory that the file is in
@@ -40,13 +38,12 @@ augroup END
 
 "{{{Misc Settings
 
-" Necesary  for lots of cool vim things
 set nocompatible
 
-" This shows what you are typing as a command.  I love this!
+" show when entering command
 set showcmd
 
-" Folding Stuffs
+" Code Folding
 set foldmethod=marker
 
 " Needed for Syntax Highlighting and stuff
@@ -55,14 +52,10 @@ filetype plugin on
 syntax enable
 set grepprg=grep\ -nH\ $*
 
-" Who doesn't like autoindent?
+" Indenting
 set autoindent
-
-" Spaces are better than a tab character
 set expandtab
 set smarttab
-
-" set 4 char tabs
 set shiftwidth=4
 set softtabstop=4
 
@@ -72,31 +65,22 @@ if version >= 700
    set nospell
 endif
 
-" Real men use gcc
-"compiler gcc
-
-" Cool tab completion stuff
+" tab completion
 set wildmenu
 set wildmode=list:longest,full
 
 " Enable mouse support in console
 set mouse=a
 
-" Got backspace?
+" Got backspace
 set backspace=2
 
-" Line Numbers PWN!
-set number
-
-" Ignoring case is a fun trick
+" casing
 set ignorecase
-
-" And so is Artificial Intellegence!
 set smartcase
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
+" jj for quick escaping
 inoremap jj <Esc>
-
 nnoremap JJJJ <Nop>
 
 " Incremental searching is sexy
@@ -105,17 +89,25 @@ set incsearch
 " Highlight things that we find with the search
 set hlsearch
 
-" Since I use linux, I want this
-let g:clipbrdDefaultReg = '+'
-
-" When I close a tab, remove the buffer
+" remove buffer on close
 set nohidden
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
-" }}}
 
-"Status line gnarliness
+
+filetype plugin indent on
+syntax on
+
+
+" Backups
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
+
+
+" status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
@@ -133,24 +125,6 @@ endfunction
 
 "}}}
 
-"{{{Theme Rotating
-let themeindex=0
-function! RotateColorTheme()
-   let y = -1
-   while y == -1
-      let colorstring = "inkpot#ron#blue#elflord#evening#koehler#murphy#pablo#desert#torte#"
-      let x = match( colorstring, "#", g:themeindex )
-      let y = match( colorstring, "#", x + 1 )
-      let g:themeindex = x + 1
-      if y == -1
-         let g:themeindex = 0
-      else
-         let themestring = strpart(colorstring, x + 1, y - x - 1)
-         return ":colorscheme ".themestring
-      endif
-   endwhile
-endfunction
-" }}}
 
 "{{{ Paste Toggle
 let paste_mode = 0 " 0 = normal, 1 = paste
@@ -265,12 +239,10 @@ nnoremap <leader>par :%s/^>$//<CR>
 
 "}}}
 
-" Backups
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
-au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
+"{{{ Theming
 
+" line numbers
+set number
 
 " what term
 if match($TERM, "screen")!=-1
@@ -292,6 +264,9 @@ hi CursorLine term=none cterm=none ctermbg=54
 " Color scheme
 :colorscheme 256-jungle
 
+"}}}
+
+"{{{ Plugins
 
 " Plugin manager
 execute pathogen#infect()
@@ -299,20 +274,20 @@ execute pathogen#infect()
 " NERD
 nnoremap <silent> <F2> :NERDTreeMirrorToggle<CR>
 
-"{{{Taglist configuration
+
+
+" Taglist
 let Tlist_Use_Right_Window = 1
 let Tlist_Enable_Fold_Column = 0
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
+
 "}}}
 
-let g:rct_completion_use_fri = 1
-"let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf = "kpdf"
+"{{{ Clipboard
 
-filetype plugin indent on
-syntax on
-
+let g:clipbrdDefaultReg = '+'
 set clipboard=unnamed,unnamedplus
 
+"}}}
