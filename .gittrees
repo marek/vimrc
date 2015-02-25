@@ -7,3 +7,13 @@ branch = master
 url = git@github.com:fholgado/minibufexpl.vim.git
 path = opt/minibufexpl.vim
 branch = master
+
+[subtree "nerdtree"]
+url = git@github.com:scrooloose/nerdtree.git
+path = opt/nerdtree
+branch = master
+
+[subtree "nerdtree-tabs"]
+url = git@github.com:jistr/vim-nerdtree-tabs.git
+path = opt/vim-nerdtree-tabs
+branch = master
