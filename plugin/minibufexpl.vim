@@ -1,0 +1,1 @@
+../opt/minibufexpl.vim/plugin/minibufexpl.vim
