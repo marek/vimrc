@@ -159,6 +159,11 @@ endfunction
 
 "{{{ Mappings
 
+let mapleader = "\<Space>"
+
+let g:ctrlp_map = '<Leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+
 " Open Url on this line with the browser \w
 map <Leader>w :call Browser ()<CR>
 
